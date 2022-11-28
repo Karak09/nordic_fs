@@ -1,8 +1,17 @@
 // const counter = require("./app");
 
-import { counter } from "./app";
+import { counter } from './app';
 
-const add=(a, b)=> a + b;
+class Animal {
+  makeSound() {
+    return 'bow wow';
+  }
+}
+
+const animal = new Animal();
+console.log(animal.makeSound());
+
+const add = (a, b) => a + b;
 
 console.log(add(1, 2));
 
