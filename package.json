@@ -1,0 +1,35 @@
+{
+  "name": "nordic_fs",
+  "version": "0.0.1",
+  "description": "react js training",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Karak09/nordic_fs.git"
+  },
+  "keywords": [
+    "react",
+    "javascript"
+  ],
+  "author": "Suman Karak <karaksuman9@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Karak09/nordic_fs/issues"
+  },
+  "homepage": "https://github.com/Karak09/nordic_fs#readme",
+  "dependencies": {
+    "date-fns": "^2.29.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.28.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "webpack": "^5.75.0"
+  }
+}
