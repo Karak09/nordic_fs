@@ -1,0 +1,24 @@
+{
+  "todoList": [
+    {
+      "text": "Hi",
+      "isDone": true,
+      "id": 1
+    },
+    {
+      "text": "Suman",
+      "isDone": true,
+      "id": 2
+    },
+    {
+      "text": "Karak",
+      "isDone": false,
+      "id": 3
+    },
+    {
+      "text": "jkkjbj",
+      "isDone": false,
+      "id": 4
+    }
+  ]
+}
