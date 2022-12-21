@@ -1,8 +1,0 @@
-.wrapper {
-    @apply flex flex-col items-center h-screen;
-}
-
-.heading {
-   @apply text-7xl font-bold text-teal-500;
-}
-
