@@ -18,7 +18,7 @@ function TodoApp() {
 
   return (
     <div className="wrapper">
-      <h1 className="heading">Todo App</h1>
+      <h1 className="heading">Karak Softwar</h1>
       <TodoForm addTodo={addTodo} ref={intputTextRef} />
       {hasError && <p>{hasError.message}</p>}
       {isLoading && <p>Loading...</p>}

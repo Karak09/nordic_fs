@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react';
+import { useEffect, useRef, useCallback, useMemo, useReducer } from 'react';
 import {
   ADD_TODO_FAIL,
   ADD_TODO_REQUEST,
@@ -16,19 +16,18 @@ import {
 import todoReducers, { todoInitialState } from '../reducers/todoReducers';
 
 const useTodo = () => {
-  const [todoState, dispatch] = useReducer(todoReducers,todoInitialState);
- 
-  const inputTextRef = useRef();
+  const [todoState, dispatch] = useReducer(todoReducers, todoInitialState);
 
-  const addTodo = useCallback(async (event) => {
+  const intputTextRef = useRef();
+
+  const addTodo = useCallback(async event => {
     try {
       event.preventDefault();
-      dispatch({ type: 'ADD_TODO_REQUEST' });
-
+      dispatch({ type: ADD_TODO_REQUEST });
       const res = await fetch('http://localhost:3000/todoList', {
         method: 'POST',
         body: JSON.stringify({
-          text: inputTextRef.current.value,
+          text: intputTextRef.current.value,
           isDone: false,
         }),
         headers: {
@@ -36,20 +35,17 @@ const useTodo = () => {
           Accept: 'application/json',
         },
       });
-
       const json = await res.json();
-      dispatch({ type: 'ADD_TODO_SUCCESS', payload: json });
-      // setTodoList(value=>[...value, json]);
-
-      inputTextRef.current.value = '';
+      dispatch({ type: ADD_TODO_SUCCESS, payload: json });
+      intputTextRef.current.value = '';
     } catch (error) {
-      dispatch({ type: 'ADD_TODO_FAIL', payload: { hasError: error } });
+      dispatch({ type: ADD_TODO_FAIL, payload: { hasError: error } });
     }
   }, []);
 
-  const toggleComplet = useCallback(async (item) => {
+  const toggleComplete = useCallback(async item => {
     try {
-      dispatch({ type: 'UPDATE_TODO_REQUEST' });
+      dispatch({ type: UPDATE_TODO_REQUEST });
       const res = await fetch(`http://localhost:3000/todoList/${item.id}`, {
         method: 'PUT',
         body: JSON.stringify({ ...item, isDone: !item.isDone }),
@@ -58,44 +54,44 @@ const useTodo = () => {
           Accept: 'application/json',
         },
       });
-
       const json = await res.json();
-      dispatch({ type: 'UPDATE_TODO_REQUEST', payload: json });
+      dispatch({ type: UPDATE_TODO_SUCCESS, payload: json });
     } catch (error) {
-      dispatch({ type: 'DELETE_TODO_FAIL', payload: { hasError: error } });
+      dispatch({ type: UPDATE_TODO_FAIL, payload: { hasError: error } });
     }
   }, []);
 
-  const deleteTodo = useCallback(async (item) => {
+  const deleteTodo = useCallback(async item => {
     try {
-      dispatch({ tpe: 'DELETE_TODO_REQUEST' });
+      dispatch({ type: DELETE_TODO_REQUEST });
       await fetch(`http://localhost:3000/todoList/${item.id}`, {
         method: 'DELETE',
       });
-      dispatch({ type: 'DELETE_TODO_SUCCESS', payload: item });
+      dispatch({ type: DELETE_TODO_SUCCESS, payload: item });
     } catch (error) {
-      dispatch({ type: 'DELETE_TODO_FAIL', payload: { hasError: error } });
+      dispatch({ type: DELETE_TODO_FAIL, payload: { hasError: error } });
     }
   }, []);
 
-  const loadTodo = useCallback(async (ft) => {
+  const loadTodo = useCallback(async ft => {
     try {
-      dispatch({ type: 'LOAD_TODO_REQUEST' });
+      dispatch({ type: LOAD_TODO_REQUEST });
+      // setIsLoading(true);
       let url = 'http://localhost:3000/todoList';
       if (ft !== 'all') {
-        url += `?isDone=${ft === 'Completed'}`;
+        url += `?isDone=${ft === 'completed'}`;
       }
       const res = await fetch(url);
       const json = await res.json();
       dispatch({
-        type: 'LOAD_TODO_SUCCESS',
+        type: LOAD_TODO_SUCCESS,
         payload: {
           todoList: json,
           filterType: ft,
         },
       });
     } catch (error) {
-      dispatch({ type: 'LOAD_TODO_FAIL', payload: { hasError: error } });
+      dispatch({ type: LOAD_TODO_FAIL, payload: { hasError: error } });
     }
   }, []);
 
@@ -107,11 +103,11 @@ const useTodo = () => {
       },
       {
         name: 'Pending',
-        key: 'Pending',
+        key: 'pending',
       },
       {
         name: 'Completed',
-        key: 'Completed',
+        key: 'completed',
       },
     ],
     []
@@ -124,10 +120,11 @@ const useTodo = () => {
   return {
     todoState,
     addTodo,
-    toggleComplet,
+    toggleComplete,
     deleteTodo,
     loadTodo,
     filterBtns,
+    intputTextRef,
   };
 };
 
