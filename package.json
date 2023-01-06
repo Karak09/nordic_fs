@@ -25,6 +25,7 @@
   "homepage": "https://github.com/the-special-character/nordic_fs#readme",
   "dependencies": {
     "date-fns": "^2.29.3",
+    "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-addons-shallow-compare": "^15.6.3",
     "react-dom": "^18.2.0"
